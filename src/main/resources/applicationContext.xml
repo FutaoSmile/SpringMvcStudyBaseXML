@@ -19,7 +19,13 @@
     <!--注册mvc请求处理器-->
     <!--DefaultAnnotationHandlerMapping与AnnotationMethodHandlerAdapter 两个bean,是spring MVC为@Controllers分发请求所必须的。-->
     <!--并提供了：数据绑定支持，@NumberFormatannotation支持，@DateTimeFormat支持，@Valid支持，读写XML的支持（JAXB），读写JSON的支持（Jackson）-->
-    <mvc:annotation-driven/>
+    <mvc:annotation-driven>
+        <!--不使用默认的消息转换器-->
+        <mvc:message-converters register-defaults="false">
+            <!--配置自定义的消息转换器-->
+            <bean class="com.futao.springmvcdemo.foundation.configuration.HttpMessageConverterConfiguration"/>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
 
 
     <!-- 注解的处理器适配器 -->
@@ -34,6 +40,8 @@
         <property name="dataSource" ref="dataSource"/>
         <!-- 加载Mybatis全局配置文件 -->
         <property name="configLocation" value="classpath:mybatis/mybatis-config.xml"/>
+        <property name="mapperLocations" value="classpath*:/mybatis/mapper/*.xml"/>
+        <property name="typeAliasesPackage" value="com.futao.springmvcdemo.model.entity"/>
     </bean>
     <!-- 配置mapper扫描器 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
@@ -47,7 +55,7 @@
 
     <!-- 配置基于注解的声明式事务 -->
     <!-- enables scanning for @Transactional annotations -->
-    <tx:annotation-driven transaction-manager="transactionManager"/>
+    <tx:annotation-driven/>
 
 
     <!--拦截器-->

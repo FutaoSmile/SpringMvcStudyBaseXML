@@ -27,17 +27,8 @@
         <setting name="mapUnderscoreToCamelCase" value="true"/>
 
         <setting name="localCacheScope" value="SESSION"/>
-
-
     </settings>
-    <!--<mappers>-->
-    <!--&lt;!&ndash;<package name="com.futao.springmvcdemo.dao"/>&ndash;&gt;-->
-    <!--<mapper class="com.futao.springmvcdemo.dao.ArticleDao"/>-->
-    <!--<mapper class="com.futao.springmvcdemo.dao.CommonDao"/>-->
-    <!--<mapper class="com.futao.springmvcdemo.dao.OrderDao"/>-->
-    <!--<mapper class="com.futao.springmvcdemo.dao.UserDao"/>-->
-    <!--<mapper class="com.futao.springmvcdemo.dao.TagDao"/>-->
-    <!--</mappers>-->
+
 
     <typeAliases>
         <typeAlias alias="int" type="java.lang.Integer"/>

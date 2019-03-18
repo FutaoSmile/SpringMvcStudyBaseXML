@@ -3,6 +3,7 @@ package com.futao.springmvcdemo.foundation;
 import com.futao.springmvcdemo.model.system.Constant;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.http.MediaType;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -31,6 +32,8 @@ public class AppFilter implements Filter {
         request.setCharacterEncoding(Constant.UTF8_ENCODE);
 
         response.setCharacterEncoding(Constant.UTF8_ENCODE);
+
+        response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
 
 
         log.info(StringUtils.repeat("-", 30) + "AppFilter拦截");

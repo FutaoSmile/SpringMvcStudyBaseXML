@@ -163,7 +163,7 @@ public class MybatisInterceptor implements Interceptor {
         /**
          * 记录慢sql日志
          */
-        public void log() {
+        void log() {
             LOGGER.warn(StringUtils.repeat("-", 50) + "太慢了{}", sqlTime);
         }
     }
