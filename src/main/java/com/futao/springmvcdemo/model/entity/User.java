@@ -7,8 +7,12 @@ import com.futao.springmvcdemo.model.enums.UserSexEnum;
 import com.futao.springmvcdemo.model.enums.UserStatusEnum;
 import com.futao.springmvcdemo.model.system.ErrorMessage;
 import org.hibernate.validator.constraints.Range;
+import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.validation.annotation.Validated;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -23,7 +27,7 @@ import java.sql.Timestamp;
  * Created on 2018/9/20-15:39.
  */
 @Validated
-public class User extends BaseEntity implements Comparable<User>, Cloneable {
+public class User extends BaseEntity implements Comparable<User>, Cloneable, InitializingBean, DisposableBean {
 
     public static final String ES_TYPE = "user";
     public static final String ES_INDEX_NAME = "futao";
@@ -234,5 +238,36 @@ public class User extends BaseEntity implements Comparable<User>, Cloneable {
                 ", sex=" + sex +
                 ", roles=" + roles +
                 "} " + super.toString();
+    }
+
+    /**
+     * 自定义初始化方法
+     *
+     * @throws Exception
+     */
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        System.out.println("UserBean初始化方法");
+    }
+
+    /**
+     * 自定义销毁方法
+     *
+     * @throws Exception
+     */
+    @Override
+    public void destroy() throws Exception {
+        System.out.println("UserBean销毁方法");
+    }
+
+
+    @PostConstruct
+    public void init() {
+        System.out.println("User-PostConstruct");
+    }
+
+    @PreDestroy
+    public void destroy1() {
+        System.out.println("destroy");
     }
 }

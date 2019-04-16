@@ -7,15 +7,6 @@
 
     <display-name>SpringMvcDemo</display-name>
 
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>classpath:applicationContext.xml</param-value>
-    </context-param>
-
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
-
     <!--Spring前端控制器-->
     <servlet>
         <servlet-name>springDispatcherServlet</servlet-name>
@@ -28,7 +19,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>springDispatcherServlet</servlet-name>
-        <url-pattern>/</url-pattern>
+        <url-pattern>/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>springDispatcherServlet</servlet-name>
