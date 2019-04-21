@@ -74,5 +74,4 @@
     <!--<mvc:resources location="classpath:/META-INF/resources/" mapping="swagger-ui.html"/>-->
     <!--swagger-->
     <!--<bean class="com.futao.springmvcdemo.foundation.configuration.SwaggerConfiguration"/>-->
-
 </beans>

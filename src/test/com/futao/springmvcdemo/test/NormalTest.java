@@ -31,7 +31,16 @@ public class NormalTest {
 
     @Test
     public void test1() {
-        AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(SpringConfig.class);
+//        AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(SpringConfig.class);
+        //1.创建一个applicationContext
+        AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
+//        2.设置需要激活的环境
+        applicationContext.getEnvironment().setActiveProfiles("dev");
+        //3.注册主配置类
+        applicationContext.register(SpringConfig.class);
+        //4.刷新容器
+        applicationContext.refresh();
+
         for (String name : applicationContext.getBeanDefinitionNames()) {
 //            System.out.println(name);
         }
