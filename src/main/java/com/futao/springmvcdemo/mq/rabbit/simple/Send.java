@@ -6,32 +6,26 @@ import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import lombok.Cleanup;
 import lombok.SneakyThrows;
-import org.junit.Test;
-
-import java.nio.charset.Charset;
+import lombok.extern.slf4j.Slf4j;
 
 /**
- * 简单消息队列
+ * 简单发送者
  *
  * @author futao
- * Created on 2019-04-19.
+ * Created on 2019-04-22.
  */
-public class SimpleProducer {
-
-
-    @Test
+@Slf4j
+public class Send {
     @SneakyThrows
-    public void test1() {
-        //获取链接
+    public static void main(String[] args) {
         @Cleanup
         Connection connection = RabbitMqConnectionTools.getConnection();
-        //获取通道
         @Cleanup
         Channel channel = connection.createChannel();
-        //定义queue
+        //定义一个队列
         channel.queueDeclare(RabbitMqQueueEnum.SIMPLE.getQueueName(), false, false, false, null);
-        channel.basicPublish("", RabbitMqQueueEnum.SIMPLE.getQueueName(), false, null, "i am simple queue".getBytes(Charset.forName("utf-8")));
+        String msg = "Hello RabbitMq!";
+        channel.basicPublish("", RabbitMqQueueEnum.SIMPLE.getQueueName(), null, msg.getBytes());
+        log.info("Send msg:[{}] success", msg);
     }
-
-
 }

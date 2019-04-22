@@ -1,7 +1,9 @@
 package com.futao.springmvcdemo.mq.rabbit;
 
+import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
+import lombok.SneakyThrows;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
@@ -41,7 +43,18 @@ public class RabbitMqConnectionTools {
         factory.setPort(5672);
         factory.setUsername("futao");
         factory.setPassword("123456");
-        factory.setVirtualHost("/springboot");
+        factory.setVirtualHost("/springmvc");
         return factory;
+    }
+
+    /**
+     * 创建并获取通道
+     *
+     * @return
+     */
+    @SneakyThrows
+    public static Channel getChannel() {
+        Connection connection = RabbitMqConnectionTools.getConnection();
+        return connection.createChannel();
     }
 }
