@@ -1,7 +1,7 @@
-package com.futao.springmvcdemo.mq.rabbit.remote.procedure.call;
+package com.futao.springmvcdemo.mq.rabbit.primitive.remote.procedure.call;
 
-import com.futao.springmvcdemo.mq.rabbit.RabbitMqConnectionTools;
-import com.futao.springmvcdemo.mq.rabbit.RabbitMqQueueEnum;
+import com.futao.springmvcdemo.mq.rabbit.primitive.RabbitMqConnectionTools;
+import com.futao.springmvcdemo.mq.rabbit.primitive.RabbitMqQueueEnum;
 import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.DeliverCallback;

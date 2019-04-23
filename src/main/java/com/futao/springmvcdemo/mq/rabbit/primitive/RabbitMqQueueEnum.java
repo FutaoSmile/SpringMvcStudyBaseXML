@@ -1,4 +1,4 @@
-package com.futao.springmvcdemo.mq.rabbit;
+package com.futao.springmvcdemo.mq.rabbit.primitive;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

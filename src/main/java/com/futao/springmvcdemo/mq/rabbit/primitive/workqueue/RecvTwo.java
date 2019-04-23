@@ -1,7 +1,7 @@
-package com.futao.springmvcdemo.mq.rabbit.workqueue;
+package com.futao.springmvcdemo.mq.rabbit.primitive.workqueue;
 
-import com.futao.springmvcdemo.mq.rabbit.RabbitMqConnectionTools;
-import com.futao.springmvcdemo.mq.rabbit.RabbitMqQueueEnum;
+import com.futao.springmvcdemo.mq.rabbit.primitive.RabbitMqConnectionTools;
+import com.futao.springmvcdemo.mq.rabbit.primitive.RabbitMqQueueEnum;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.DeliverCallback;
 import lombok.SneakyThrows;

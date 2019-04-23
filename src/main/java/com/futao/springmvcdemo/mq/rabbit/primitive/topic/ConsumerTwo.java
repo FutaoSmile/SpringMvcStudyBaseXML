@@ -1,8 +1,8 @@
-package com.futao.springmvcdemo.mq.rabbit.routing;
+package com.futao.springmvcdemo.mq.rabbit.primitive.topic;
 
-import com.futao.springmvcdemo.mq.rabbit.ExchangeTypeEnum;
-import com.futao.springmvcdemo.mq.rabbit.RabbitMqConnectionTools;
-import com.futao.springmvcdemo.mq.rabbit.RabbitMqQueueEnum;
+import com.futao.springmvcdemo.mq.rabbit.primitive.ExchangeTypeEnum;
+import com.futao.springmvcdemo.mq.rabbit.primitive.RabbitMqConnectionTools;
+import com.futao.springmvcdemo.mq.rabbit.primitive.RabbitMqQueueEnum;
 import com.rabbitmq.client.BuiltinExchangeType;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.DeliverCallback;
@@ -10,7 +10,7 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * 路由模式-消费者2
+ * Topic模式-消费者2
  *
  * @author futao
  * Created on 2019-04-22.
@@ -22,11 +22,11 @@ public class ConsumerTwo {
         Channel channel = RabbitMqConnectionTools.getChannel();
         //开启持久化队列
         boolean durable = true;
-        channel.queueDeclare(RabbitMqQueueEnum.EXCHANGE_QUEUE_DIRECT_TWO.getQueueName(), durable, false, false, null);
+        channel.queueDeclare(RabbitMqQueueEnum.EXCHANGE_QUEUE_TOPIC_TWO.getQueueName(), durable, false, false, null);
         //定义交换器类型
-        channel.exchangeDeclare(ExchangeTypeEnum.DIRECT.getExchangeName(), BuiltinExchangeType.DIRECT);
+        channel.exchangeDeclare(ExchangeTypeEnum.TOPIC.getExchangeName(), BuiltinExchangeType.TOPIC);
         //将消息队列与Exchange交换器进行绑定(只订阅路由key为"log.error"的消息)
-        channel.queueBind(RabbitMqQueueEnum.EXCHANGE_QUEUE_DIRECT_TWO.getQueueName(), ExchangeTypeEnum.DIRECT.getExchangeName(), "log.error");
+        channel.queueBind(RabbitMqQueueEnum.EXCHANGE_QUEUE_TOPIC_TWO.getQueueName(), ExchangeTypeEnum.TOPIC.getExchangeName(), "log.error");
         //告诉rabbitmq一次只发送一条消息，并且在前一个消息未被处理或者消费之前，不继续发送下一个消息
         channel.basicQos(1);
         log.info("Waiting for message...");
@@ -42,7 +42,7 @@ public class ConsumerTwo {
         });
         //关闭自动应答
         boolean autoAck = false;
-        channel.basicConsume(RabbitMqQueueEnum.EXCHANGE_QUEUE_DIRECT_TWO.getQueueName(), autoAck, deliverCallback, consumerTag -> {
+        channel.basicConsume(RabbitMqQueueEnum.EXCHANGE_QUEUE_TOPIC_TWO.getQueueName(), autoAck, deliverCallback, consumerTag -> {
         });
     }
 }

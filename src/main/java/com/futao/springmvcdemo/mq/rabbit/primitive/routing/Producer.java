@@ -1,7 +1,7 @@
-package com.futao.springmvcdemo.mq.rabbit.routing;
+package com.futao.springmvcdemo.mq.rabbit.primitive.routing;
 
-import com.futao.springmvcdemo.mq.rabbit.ExchangeTypeEnum;
-import com.futao.springmvcdemo.mq.rabbit.RabbitMqConnectionTools;
+import com.futao.springmvcdemo.mq.rabbit.primitive.ExchangeTypeEnum;
+import com.futao.springmvcdemo.mq.rabbit.primitive.RabbitMqConnectionTools;
 import com.rabbitmq.client.BuiltinExchangeType;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;

@@ -1,4 +1,4 @@
-package com.futao.springmvcdemo.mq.rabbit;
+package com.futao.springmvcdemo.mq.rabbit.primitive;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;

@@ -1,8 +1,8 @@
-package com.futao.springmvcdemo.mq.rabbit.topic;
+package com.futao.springmvcdemo.mq.rabbit.primitive.routing;
 
-import com.futao.springmvcdemo.mq.rabbit.ExchangeTypeEnum;
-import com.futao.springmvcdemo.mq.rabbit.RabbitMqConnectionTools;
-import com.futao.springmvcdemo.mq.rabbit.RabbitMqQueueEnum;
+import com.futao.springmvcdemo.mq.rabbit.primitive.ExchangeTypeEnum;
+import com.futao.springmvcdemo.mq.rabbit.primitive.RabbitMqConnectionTools;
+import com.futao.springmvcdemo.mq.rabbit.primitive.RabbitMqQueueEnum;
 import com.rabbitmq.client.BuiltinExchangeType;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.DeliverCallback;
@@ -10,23 +10,24 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * Topic模式-消费者4
+ * 路由模式-消费者1
  *
  * @author futao
  * Created on 2019-04-22.
  */
 @Slf4j
-public class ConsumerFour {
+public class ConsumerOne {
     @SneakyThrows
     public static void main(String[] args) {
         Channel channel = RabbitMqConnectionTools.getChannel();
         //开启持久化队列
         boolean durable = true;
-        channel.queueDeclare(RabbitMqQueueEnum.EXCHANGE_QUEUE_TOPIC_FOUR.getQueueName(), durable, false, false, null);
+        channel.queueDeclare(RabbitMqQueueEnum.EXCHANGE_QUEUE_DIRECT_ONE.getQueueName(), durable, false, false, null);
         //定义交换器类型
-        channel.exchangeDeclare(ExchangeTypeEnum.DIRECT.getExchangeName(), BuiltinExchangeType.TOPIC);
+        channel.exchangeDeclare(ExchangeTypeEnum.DIRECT.getExchangeName(), BuiltinExchangeType.DIRECT);
         //将消息队列与Exchange交换器与路由键绑定（同时订阅路由key为"log.info"和"log.error"的消息）
-        channel.queueBind(RabbitMqQueueEnum.EXCHANGE_QUEUE_TOPIC_FOUR.getQueueName(), ExchangeTypeEnum.TOPIC.getExchangeName(), "log.#");
+        channel.queueBind(RabbitMqQueueEnum.EXCHANGE_QUEUE_DIRECT_ONE.getQueueName(), ExchangeTypeEnum.DIRECT.getExchangeName(), "log.error");
+        channel.queueBind(RabbitMqQueueEnum.EXCHANGE_QUEUE_DIRECT_ONE.getQueueName(), ExchangeTypeEnum.DIRECT.getExchangeName(), "log.info");
         //告诉rabbitmq一次只发送一条消息，并且在前一个消息未被处理或者消费之前，不继续发送下一个消息
         channel.basicQos(1);
         log.info("Waiting for message...");
@@ -42,7 +43,7 @@ public class ConsumerFour {
         });
         //关闭自动应答
         boolean autoAck = false;
-        channel.basicConsume(RabbitMqQueueEnum.EXCHANGE_QUEUE_TOPIC_FOUR.getQueueName(), autoAck, deliverCallback, consumerTag -> {
+        channel.basicConsume(RabbitMqQueueEnum.EXCHANGE_QUEUE_DIRECT_ONE.getQueueName(), autoAck, deliverCallback, consumerTag -> {
         });
     }
 }
